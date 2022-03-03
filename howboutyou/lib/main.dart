@@ -20,9 +20,9 @@ class MyApp extends StatelessWidget {
         // or simply save your changes to "hot reload" in a Flutter IDE).
         // Notice that the counter didn't reset back to zero; the application
         // is not restarted.
-        primarySwatch: Colors.blue,
+        primarySwatch: Colors.blueGrey,
       ),
-      home: MyHomePage(title: 'Flutter Test Page'),
+      home: MyHomePage(title: 'HowBoutYou'),
     );
   }
 }
@@ -71,6 +71,7 @@ class _MyHomePageState extends State<MyHomePage> {
       appBar: AppBar(
         // Here we take the value from the MyHomePage object that was created by
         // the App.build method, and use it to set our appbar title.
+        centerTitle: true,
         title: Text(widget.title),
       ),
       body: Center(
@@ -93,21 +94,44 @@ class _MyHomePageState extends State<MyHomePage> {
           // horizontal).
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            Text(
-              'You have pushed the button this many times:',
+            new SizedBox(
+              width: 300.0,
+              height: 80.0,
+              child: ElevatedButton(
+                style: ElevatedButton.styleFrom(
+                textStyle: const TextStyle(fontSize: 20),
+              ),
+                onPressed: () {},
+                child: const Text('Create Event'),
+              ),
             ),
-            Text(
-              '$_counter',
-              style: Theme.of(context).textTheme.headline4,
+            new SizedBox(height: 50.0),
+            new SizedBox(
+              width: 300.0,
+              height: 80.0,
+              child: ElevatedButton(
+                style: ElevatedButton.styleFrom(
+                textStyle: const TextStyle(fontSize: 20),
+              ),
+                onPressed: () {},
+                child: const Text('View Event'),
+              ),
+            ),
+            new SizedBox(height: 50.0),
+            new SizedBox(
+              width: 300.0,
+              height: 80.0,
+              child: ElevatedButton(
+                style: ElevatedButton.styleFrom(
+                textStyle: const TextStyle(fontSize: 20),
+              ),
+                onPressed: () {},
+                child: const Text('Sign in with Google'),
+              ),
             ),
           ],
         ),
       ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
-        tooltip: 'Increment',
-        child: Icon(Icons.add),
-      ), // This trailing comma makes auto-formatting nicer for build methods.
     );
   }
 }
