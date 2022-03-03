@@ -29,6 +29,7 @@ howboutyou/.flutter-plugins-dependencies
 howboutyou/.packages
 howboutyou/.pub-cache/
 howboutyou/.pub/
+howboutyou/pubspec.lock
 howboutyou/build/
 
 # Web related
