@@ -1,0 +1,46 @@
+{
+  "project_info": {
+    "project_number": "250823763644",
+    "project_id": "howboutyou",
+    "storage_bucket": "howboutyou.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:250823763644:android:c27041245ef81e9cc652b9",
+        "android_client_info": {
+          "package_name": "com.example.howboutyou"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "250823763644-aq7oe22b6clpimf4kvetkj40ils65vvg.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBArOTpnwn1mtWUntDD7fma6l4WsviPEbU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "250823763644-aq7oe22b6clpimf4kvetkj40ils65vvg.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "250823763644-q649itmv81lu7fi40q4fqco5g377r8o8.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.howboutyou.app"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
