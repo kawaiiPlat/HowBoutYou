@@ -31,4 +31,9 @@ class AuthService {
   // register w/ email
 
   //sign out
+  Future signOut() async {
+    try {
+      return await _auth.signOut();
+    } catch (e) {}
+  }
 }
