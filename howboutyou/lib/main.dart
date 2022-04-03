@@ -99,9 +99,15 @@ class _MyHomePageState extends State<MyHomePage> {
               height: 80.0,
               child: ElevatedButton(
                 style: ElevatedButton.styleFrom(
-                textStyle: const TextStyle(fontSize: 20),
-              ),
-                onPressed: () {},
+                  textStyle: const TextStyle(fontSize: 20),
+                ),
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => const SecondRoute()),
+                  );
+                },
                 child: const Text('Create Event'),
               ),
             ),
@@ -111,9 +117,15 @@ class _MyHomePageState extends State<MyHomePage> {
               height: 80.0,
               child: ElevatedButton(
                 style: ElevatedButton.styleFrom(
-                textStyle: const TextStyle(fontSize: 20),
-              ),
-                onPressed: () {},
+                  textStyle: const TextStyle(fontSize: 20),
+                ),
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => const SecondRoute()),
+                  );
+                },
                 child: const Text('View Event'),
               ),
             ),
@@ -123,8 +135,8 @@ class _MyHomePageState extends State<MyHomePage> {
               height: 80.0,
               child: ElevatedButton(
                 style: ElevatedButton.styleFrom(
-                textStyle: const TextStyle(fontSize: 20),
-              ),
+                  textStyle: const TextStyle(fontSize: 20),
+                ),
                 onPressed: () {},
                 child: const Text('Sign in with Google'),
               ),
@@ -132,6 +144,100 @@ class _MyHomePageState extends State<MyHomePage> {
           ],
         ),
       ),
+    );
+  }
+}
+
+List<List<String>> gridState = [
+  ["M", "Tu", "W", "Th", "F", "Sa", "Su"],
+  ["", "", "", "", "", "", ""],
+  ["", "", "", "", "", "", ""],
+  ["", "", "", "", "", "", ""],
+  ["", "", "", "", "", "", ""],
+  ["", "", "", "", "", "", ""],
+  ["", "", "", "", "", "", ""],
+];
+Widget _buildGridItem(int x, int y) {
+  switch (gridState[x][y]) {
+    case '':
+      return Text('');
+      break;
+    case 'P1':
+      return Container(
+        color: Colors.blue,
+      );
+      break;
+    case 'P2':
+      return Container(
+        color: Colors.yellow,
+      );
+      break;
+    case 'T':
+      return Icon(
+        Icons.terrain,
+        size: 40.0,
+        color: Colors.red,
+      );
+      break;
+    case 'B':
+      return Icon(Icons.remove_red_eye, size: 40.0);
+      break;
+    default:
+      return Text(gridState[x][y].toString());
+  }
+}
+
+Widget _buildGridItems(BuildContext context, int index) {
+  int gridStateLength = gridState.length;
+  int x, y = 0;
+  x = (index / gridStateLength).floor();
+  y = (index % gridStateLength);
+  return GestureDetector(
+    //onTap: () => _gridItemTapped(x, y),
+    child: GridTile(
+      child: Container(
+        decoration:
+            BoxDecoration(border: Border.all(color: Colors.black, width: 0.1)),
+        child: Center(
+          child: _buildGridItem(x, y),
+        ),
+      ),
+    ),
+  );
+}
+
+Widget _buildGameBody() {
+  int gridStateLength = gridState.length;
+  return Column(children: <Widget>[
+    AspectRatio(
+      aspectRatio: 1.0,
+      child: Container(
+        padding: const EdgeInsets.all(8.0),
+        margin: const EdgeInsets.all(8.0),
+        decoration:
+            BoxDecoration(border: Border.all(color: Colors.black, width: 2.0)),
+        child: GridView.builder(
+          gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+            crossAxisCount: gridStateLength,
+          ),
+          itemBuilder: _buildGridItems,
+          itemCount: gridStateLength * gridStateLength,
+        ),
+      ),
+    ),
+  ]);
+}
+
+class SecondRoute extends StatelessWidget {
+  const SecondRoute({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text('Second Route'),
+      ),
+      body: _buildGameBody(),
     );
   }
 }
