@@ -18,6 +18,9 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: howboutyou
 
     steps:
       - uses: actions/checkout@v2
@@ -30,7 +33,6 @@ jobs:
 
       # because our flutter project is in a different folder, move to it
       - name: Install dependencies
-        working-directory: ./howboutyou
         run: dart pub get
 
       # Uncomment this step to verify the use of 'dart format' on each commit.
@@ -39,7 +41,6 @@ jobs:
 
       # Consider passing '--fatal-infos' for slightly stricter analysis.
       - name: Analyze project source
-        working-directory: ./howboutyou
         run: dart analyze
 
       # Your project will need to have tests in test/ and a dependency on
