@@ -1,5 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:howboutyou/models/user.dart';
+import 'package:howboutyou/services/database.dart';
 
 class AuthService {
   // underscore signals private property
@@ -26,7 +27,19 @@ class AuthService {
       return null;
     }
   }
+
   // sign in w/ email
+  Future signInWithEmail(String email, String password) async {
+    try {
+      UserCredential result = await _auth.signInWithEmailAndPassword(
+          email: email, password: password);
+      User? user = result.user;
+      return _userFromFirebaseUser(user);
+    } catch (e) {
+      print(e.toString());
+      return null;
+    }
+  }
 
   // register w/ email
   Future registerWithEmail(String email, String password) async {
@@ -34,6 +47,8 @@ class AuthService {
       UserCredential result = await _auth.createUserWithEmailAndPassword(
           email: email, password: password);
       User? user = result.user;
+
+      await DatabaseService(uid: user!.uid).updateUserData('New User');
       return _userFromFirebaseUser(user);
     } catch (e) {
       print(e.toString());
