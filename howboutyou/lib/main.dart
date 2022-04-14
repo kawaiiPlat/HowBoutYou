@@ -12,7 +12,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
+      title: 'HowAboutYou',
       theme: ThemeData(
         primarySwatch: Colors.green,
       ),
@@ -30,18 +30,18 @@ class MyHomePage extends StatefulWidget {
 }
 
 
-
-
-
 class _MyHomePageState extends State<MyHomePage> {
   //Selects the given date programmatically in the SfCalendar by checking that the date falls in between the minimum and maximum date range
   CalendarController _calendarController = CalendarController(); 
 
   @override
-  initState() {
+  void initState() {
     _calendarController.displayDate = DateTime(2021, 12, 08);
+    //_selectedAppointment = null;
     super.initState();
   }
+
+  
 
   @override
     Widget build(BuildContext context) {
@@ -94,26 +94,42 @@ class _MyHomePageState extends State<MyHomePage> {
               color: Color.fromARGB(255, 6, 9, 185),
               letterSpacing: 1,
               fontWeight: FontWeight.bold),
-
-          //data source
-          dataSource: _getDataSource(), 
           
-         
+          //data source
+          dataSource: _getCalendarDataSource(), 
+
+
+          allowAppointmentResize: true,
+
+          //this enable to see people who schedule for meeting
+          resourceViewSettings: ResourceViewSettings(
+          visibleResourceCount: 2,
+          showAvatar:  true,
+          )
+
+
+        
+
+
+
         )
         );
     }        
 }
 
 
-_AppointmentDataSource _getDataSource() {
+_AppointmentDataSource _getCalendarDataSource() {
   List<Appointment> appointments = <Appointment>[];
   appointments.add(Appointment(
     startTime: DateTime.now(),
     endTime: DateTime.now().add(Duration(minutes: 10)),
     subject: 'Meeting',
     color: Colors.blue,
+    isAllDay: true,
     startTimeZone: '',
     endTimeZone: '',
+    recurrenceRule: 'FREQ=DAILY;INTERVAL=2;COUNT=10'
+    
   ));
 
   return _AppointmentDataSource(appointments);
@@ -123,7 +139,56 @@ class _AppointmentDataSource extends CalendarDataSource {
   _AppointmentDataSource(List<Appointment> source){
    appointments = source; 
   }
+
+  @override
+  DateTime getStartTime(int index) {
+    return appointments![index].from;
+  }
+
+  @override
+  DateTime getEndTime(int index) {
+    return appointments![index].to;
+  }
+
+  @override
+  bool isAllDay(int index) {
+    return appointments![index].isAllDay;
+  }
+
+  @override
+  String getSubject(int index) {
+    return appointments![index].eventName;
+  }
+
+  @override
+  String getStartTimeZone(int index) {
+    return appointments![index].startTimeZone;
+  }
+
+  @override
+  String getEndTimeZone(int index) {
+    return appointments![index].endTimeZone;
+  }
+
+  @override
+  Color getColor(int index) {
+    return appointments![index].background;
+  }
+
+   @override
+  String getRecurrenceRule(int index) {
+    return appointments![index].recurrenceRule;
+  }
+
+    @override
+  List<DateTime> getRecurrenceExceptionDates(int index) {
+    return appointments![index].exceptionDates;
+  }
+  
 }
+
+ 
+
 
 class Meeting {
   Meeting(
@@ -145,12 +210,13 @@ class Meeting {
 }
 
 
-
+//enable drag dates
 void dragStart(AppointmentDragStartDetails appointmentDragStartDetails) {
   dynamic appointment = appointmentDragStartDetails.appointment;
   CalendarResource? resource = appointmentDragStartDetails.resource;
 }
 
+//update the drag
 void dragUpdate(AppointmentDragUpdateDetails appointmentDragUpdateDetails) {
   dynamic appointment = appointmentDragUpdateDetails.appointment;
   DateTime? draggingTime = appointmentDragUpdateDetails.draggingTime;
@@ -158,3 +224,7 @@ void dragUpdate(AppointmentDragUpdateDetails appointmentDragUpdateDetails) {
   CalendarResource? sourceResource = appointmentDragUpdateDetails.sourceResource;
   CalendarResource? targetResource = appointmentDragUpdateDetails.targetResource;
 }
+
+
+
+
