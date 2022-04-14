@@ -40,6 +40,8 @@ import 'package:howboutyou/screens/home/user_list.dart';
 class Home extends StatelessWidget {
   final AuthService _auth = AuthService();
 
+  
+
   @override
   Widget build(BuildContext context) {
     return StreamProvider<QuerySnapshot?>.value(
