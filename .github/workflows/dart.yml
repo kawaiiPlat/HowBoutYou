@@ -35,5 +35,8 @@ jobs:
       - name: Install dependencies
         run: flutter pub get
         
+      - name: Set up the repo to build apps
+        run: flutter create .
+
       - name: Confirm the build succeeds
         run: flutter build web
