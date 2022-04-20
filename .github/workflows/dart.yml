@@ -35,6 +35,8 @@ jobs:
       - name: Install dependencies
         run: flutter pub get
         
+      # pipe operator runs multiple lines at once
       - name: Confirm the build succeeds
-        run: flutter create .
+        run: |
+        flutter create .
         run: flutter build web
