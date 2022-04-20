@@ -31,6 +31,9 @@ howboutyou/.pub-cache/
 howboutyou/.pub/
 howboutyou/pubspec.lock
 howboutyou/build/
+howboutyou/windows/
+howboutyou/linux/
+howboutyou/web/
 
 # Web related
 howboutyou/lib/generated_plugin_registrant.dart
