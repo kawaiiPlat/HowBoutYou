@@ -36,4 +36,5 @@ jobs:
         run: flutter pub get
         
       - name: Confirm the build succeeds
+        run: flutter create .
         run: flutter build web
